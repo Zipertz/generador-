@@ -2,6 +2,7 @@ package com.example.semana9;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -101,13 +102,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Restablecer los valores
-                puntos1.setText("");
-                puntos2.setText("");
-                jugadores.setText("Jugador 1");
-                ganador.setText("");
+               // puntos1.setText("");
+             // jugadores.setText("Jugador 1");
+               // ganador.setText("");
 
                 // Habilitar el botón jugadores
-                jugadores.setEnabled(true);
+                //jugadores.setEnabled(true);
+
+                Intent intent = new Intent(getApplicationContext(),ListaActivity.class);
+                startActivity(intent);
             }
         });
 
