@@ -17,10 +17,19 @@ import java.util.List;
 public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.ContactoViewHolder> {
     private List<String> nombres;
     private List<String> numeros;
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(String numero);
+    }
 
     public ContactoAdapter(List<String> nombres, List<String> numeros) {
         this.nombres = nombres;
         this.numeros = numeros;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -48,7 +57,9 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
         btnLlamar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                realizarLlamada(numero); // Realiza la llamada al número correspondiente
+                if (listener != null) {
+                    listener.onItemClick(numero);
+                }
             }
         });
     }
@@ -62,10 +73,5 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
         public ContactoViewHolder(@NonNull View itemView) {
             super(itemView);
         }
-    }
-
-    private void realizarLlamada(String numero) {
-        // Agrega el código para realizar la llamada al número indicado
-        // ...
     }
 }
