@@ -1,30 +1,28 @@
 package com.example.semana9;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 
-import com.example.semana9.ContactoAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class ContactoActivity extends AppCompatActivity implements ContactoAdapter.OnItemClickListener {
     private ArrayList<String> nombres = new ArrayList<>();
     private ArrayList<String> numeros = new ArrayList<>();
+    private ArrayList<String> imagenes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacto);
         llenarContactos();
-        ContactoAdapter adapter = new ContactoAdapter(nombres, numeros);
+        ContactoAdapter adapter = new ContactoAdapter(nombres, numeros,imagenes);
         adapter.setOnItemClickListener(this);
 
         RecyclerView rvLista = findViewById(R.id.rvListaContacto);
@@ -32,17 +30,17 @@ public class ContactoActivity extends AppCompatActivity implements ContactoAdapt
         rvLista.setAdapter(adapter);
     }
 
-    public void agregarContacto(String nombre, String numero) {
+    public void agregarContacto(String nombre, String numero, String imagenUrl) {
         nombres.add(nombre);
         numeros.add(numero);
+        imagenes.add(imagenUrl);
     }
 
     public void llenarContactos() {
-        agregarContacto("jose", "976532154");
-        agregarContacto("Carlos", "976246813");
-        agregarContacto("Pepe", "9764456431");
-        agregarContacto("jhordab", "976124564");
-    }
+        agregarContacto("jose", "976532154", "https://www.cleverfiles.com/howto/wp-content/uploads/2018/03/minion.jpg");
+        agregarContacto("Carlos", "976246813", "https://www.cleverfiles.com/howto/wp-content/uploads/2018/03/minion.jpg");
+        agregarContacto("Pepe", "9764456431", "https://www.cleverfiles.com/howto/wp-content/uploads/2018/03/minion.jpg");
+        agregarContacto("jhordab", "976124564", "https://www.cleverfiles.com/howto/wp-content/uploads/2018/03/minion.jpg"); }
 
     @Override
     public void onItemClick(String numero) {
